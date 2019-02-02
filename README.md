@@ -13,6 +13,8 @@ Following the **composite** design pattern, our composite class will be the Conn
 
 ## Diagram
 
+![example expression tree](https://github.com/cs100/assignment-cs-100-darrien-christian/blob/master/images/intro-tree.png?raw=true)
+
 ## Classes
 Root directory: Contains files (README.md, src/, tests/, CMakeLists.txt)
 src/
@@ -28,14 +30,22 @@ Test.cpp: Google testing framework
 
 ## Prototypes/Research
 ```c++
-#include <iostream>
+int main() {
+    pid_t parent = getpid();
+    pid_t pid = fork();
 
-int main(int argv, char** argc) {
-    // Skip the first argc index because its the program
-    for(int i = 1; i < argv; i++) {
-        std::cout << argc[i] << " ";
+    if (pid == -1){
+        // error, failed to fork()
+    } 
+    else if (pid > 0){
+        int status;
+        waitpid(pid, &status, 0);
     }
-    std::cout << std::endl;
+    else {
+        // we are the child
+        execve(...);
+        _exit(EXIT_FAILURE);   // exec never returns
+    }
 }
 ```
 **Create composite for command operators**.
