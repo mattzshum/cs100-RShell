@@ -9,7 +9,7 @@ We will be developing a command shell (Rshell) in C++ that will be able to print
 
 Rshell will be able to handle inputs without limit to the number of commands chained together through connections as well as any combination of operators. Since this program is structural/object focused, we will use composite pattern to represent the hierarchies of our classes. 
 
-Following the **composite** design pattern, our composite class will be the Connector class along with a leaf class called Operator.
+Following the **composite** design pattern, our composite class will be the *Connector* class along with a *leaf* class called Operator.
 
 ## Diagram
 
