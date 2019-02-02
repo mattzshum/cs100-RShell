@@ -60,14 +60,14 @@ int main() {
 
 > Note: For every *syscall*, errors should be checked and perror should be called if an error does occur.
 
-**Creaiting files, folders, and directories**
+**Creating files, folders, and directories**
 * Creating folder “src/” for all source files. 
 * Header files can be kept in the same folders or their own header folder.
 * A “unit_tests/” directory should exist for all the unit test for all the Google Unit Testing framework.
 * The main test file can be in this folder or the “src”. 
 * An “Integration_tests/” directory should also contain all the integration test. 
 * The root directory must also include two targets, the rshell, which should build the main executable, and the test which should run the unit test that have been created using the Google Unit Test Framework. 
-*Any temp files and machine specific files should be added to the .gitignore.
+* Any temp files and machine specific files should be added to the .gitignore.
 
 ## Development and Testing Roadmap
 * Development will be carried out with continued communication and collaboration
