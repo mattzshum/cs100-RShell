@@ -38,12 +38,12 @@ int main(int argv, char** argc) {
     std::cout << std::endl;
 }
 ```
-**Create composite for command operators.
-*For “;”, the next command is always executed.
-*For “||”, If the first command fails, execute the next command.
-*For “&&”, If the first command succeeds, execute the next command.
-*For “exit”, the rest of the command line is ignored.
-*For “#”, the rest of the command line is entered as a comment.
+** Create composite for command operators.
+* For “;”, the next command is always executed.
+* For “||”, If the first command fails, execute the next command.
+* For “&&”, If the first command succeeds, execute the next command.
+* For “exit”, the rest of the command line is ignored.
+* For “#”, the rest of the command line is entered as a comment.
 
 Every syscall, errors should be checked and perror should be called if an error does occur.
 Creating folder “src/” for all source files. Header files can be kept in the same folders or their own header folder. A “unit_tests/” directory should exist for all the unit test for all the Google Unit Testing framework. The main test file can be in this folder or the “src”. An “Integration_tests/” directory should also contain all the integration test. The root directory must also include two targets, the rshell, which should build the main executable, and the test which should run the unit test that have been created using the Google Unit Test Framework. Any temp files and machine specific files should be added to the .gitignore.
