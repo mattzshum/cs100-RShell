@@ -13,8 +13,10 @@ Following the **composite** design pattern, our composite class will be the Conn
 
 ## Diagram
 
-![example expression tree](https://github.com/cs100/assignment-cs-100-darrien-christian/images/Composite.png?raw=true)
+![example expression tree](https://github.com/cs100/assignment-cs-100-darrien-christian/images/Composite.png)
 
+        assignment-cs-100-darrien-christian/images/Composite.png
+      
 ## Classes
 Root directory: Contains files (README.md, src/, tests/, CMakeLists.txt)
 src/
