@@ -29,6 +29,9 @@ src/
 
 
 ## Prototypes/Research
+
+Main for implementing fork, getpid, and execvp.
+
 ```c++
 int main() {
     pid_t parent = getpid();
@@ -43,7 +46,7 @@ int main() {
     }
     else {
         // we are the child
-        execve(...);
+        execvp(...);
         _exit(EXIT_FAILURE);   // exec never returns
     }
 }
