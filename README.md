@@ -17,7 +17,7 @@ Following the **composite** design pattern, our composite class will be the *Con
       
 ## Classes
 * Root directory: Contains files (README.md, src/, tests/, CMakeLists.txt)
-*src/
+* src/
   * Base class: Abstract type which oversees the previous command that was output and leaves execute and check functions to be defined in child classes.
   * Connector class: Composite class which inherits from Rshell and contains the connectors And, Or, Semicolon.
   * Op class: Leaf class that inherits from the base class where each object holds a single command to execute.
