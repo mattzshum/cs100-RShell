@@ -38,7 +38,7 @@ int main(int argv, char** argc) {
     std::cout << std::endl;
 }
 ```
-Create composite for command operators
+Create composite for command operators.
 For “;”, the next command is always executed.
 For “||”, fork and use waitpid to make the parent process wait on the child process. If the first command fails, the parent execvp the next command.
 For “&&”, fork and use waitpid to make the parent wait for the child process. If the first command succeeds,  the parent execvp the next command
