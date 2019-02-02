@@ -62,12 +62,12 @@ Every *syscall*, errors should be checked and perror should be called if an erro
 Creating folder “src/” for all source files. Header files can be kept in the same folders or their own header folder. A “unit_tests/” directory should exist for all the unit test for all the Google Unit Testing framework. The main test file can be in this folder or the “src”. An “Integration_tests/” directory should also contain all the integration test. The root directory must also include two targets, the rshell, which should build the main executable, and the test which should run the unit test that have been created using the Google Unit Test Framework. Any temp files and machine specific files should be added to the .gitignore.
 
 ## Development and Testing Roadmap
-Development will be carried out with continued communication and collaboration
-Plan out and agree upon our objective and approach towards utilizing fork, waitpid, and execvp
-Christian: Responsible for Base, Op, Connector classes
-Darrien: Responsible for And, Or, Semicolon classes
-Implement test cases together and review each other’s work 
-Integrate divided work by merging branches on Github once agreed upon
+* Development will be carried out with continued communication and collaboration
+* Plan out and agree upon our objective and approach towards utilizing fork, waitpid, and execvp
+* Christian: Responsible for Base, Op, Connector classes
+* Darrien: Responsible for And, Or, Semicolon classes
+* Implement test cases together and review each other’s work 
+* Integrate divided work by merging branches on Github once agreed upon
 
 
 
