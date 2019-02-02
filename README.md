@@ -9,7 +9,7 @@ We will be developing a command shell (Rshell) in C++ that will be able to print
 
 Rshell will be able to handle inputs without limit to the number of commands chained together through connections as well as any combination of operators. Since this program is structural/object focused, we will use composite pattern to represent the hierarchies of our classes. 
 
-Following the *composite* design pattern, our composite class will be the Connector class along with a leaf class called Operator.
+Following the **composite** design pattern, our composite class will be the Connector class along with a leaf class called Operator.
 
 ## Diagram
 
@@ -45,7 +45,7 @@ int main(int argv, char** argc) {
 * For “exit”, the rest of the command line is ignored.
 * For “#”, the rest of the command line is entered as a comment.
 
-Every syscall, errors should be checked and perror should be called if an error does occur.
+Every *syscall*, errors should be checked and perror should be called if an error does occur.
 Creating folder “src/” for all source files. Header files can be kept in the same folders or their own header folder. A “unit_tests/” directory should exist for all the unit test for all the Google Unit Testing framework. The main test file can be in this folder or the “src”. An “Integration_tests/” directory should also contain all the integration test. The root directory must also include two targets, the rshell, which should build the main executable, and the test which should run the unit test that have been created using the Google Unit Test Framework. Any temp files and machine specific files should be added to the .gitignore.
 
 ## Development and Testing Roadmap
