@@ -5,11 +5,11 @@ Product Information
 > Winter 2019
 
 ## Introduction
-We will be developing a command shell (Rshell) in C++ that will be able to print command prompts, read in commands and connectors from standard input, and execute the appropriate commands using execvp, waitpid, and fork. A shell is a user interface which accesses an operating system’s services. Specific characters (commands) will be used to provide instructions and send data to the operating system. 
+We will be developing a command shell (Rshell) in C++ that will be able to print command prompts, read in commands and connectors from standard input, and execute the appropriate commands using _execvp_, _waitpid_, and _fork_. A shell is a user interface which accesses an operating system’s services. Specific characters (commands) will be used to provide instructions and send data to the operating system. 
 
 Rshell will be able to handle inputs without limit to the number of commands chained together through connections as well as any combination of operators. Since this program is structural/object focused, we will use composite pattern to represent the hierarchies of our classes. 
 
-Following the composite design pattern, our composite class will be the Connector class along with a leaf class called Operator.
+Following the *composite* design pattern, our composite class will be the Connector class along with a leaf class called Operator.
 
 ## Diagram
 
@@ -38,7 +38,7 @@ int main(int argv, char** argc) {
     std::cout << std::endl;
 }
 ```
-** Create composite for command operators.
+**Create composite for command operators**.
 * For “;”, the next command is always executed.
 * For “||”, If the first command fails, execute the next command.
 * For “&&”, If the first command succeeds, execute the next command.
