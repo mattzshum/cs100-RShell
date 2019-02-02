@@ -13,7 +13,7 @@ Following the **composite** design pattern, our composite class will be the Conn
 
 ## Diagram
 
-![example expression tree](https://github.com/cs100/assignment-cs-100-darrien-christian/images/Composite.png)
+![example expression tree](/images/Composite.png?raw=true "Diagram")
 
         assignment-cs-100-darrien-christian/images/Composite.png
       
