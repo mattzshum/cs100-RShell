@@ -14,20 +14,18 @@ Following the **composite** design pattern, our composite class will be the Conn
 ## Diagram
 
 ![example expression tree](/images/Composite.png?raw=true "Diagram")
-
-        assignment-cs-100-darrien-christian/images/Composite.png
       
 ## Classes
-Root directory: Contains files (README.md, src/, tests/, CMakeLists.txt)
+* Root directory: Contains files (README.md, src/, tests/, CMakeLists.txt)
 src/
-Base class: Abstract type which oversees the previous command that was output and leaves execute and check functions to be defined in child classes.
-Connector class: Composite class which inherits from Rshell and contains the connectors And, Or, Semicolon.
-Op class: Leaf class that inherits from the base class where each object holds a single command to execute.
-And class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command was a success.
-Or class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command fails.
-Semicolon class: Inherited class where objects represent a connector within a line of input and holds one command. Command will always execute regardless of the success or failure of the previous command. The first command in a list of commands is always from the Semicolon class.
-tests/
-Test.cpp: Google testing framework
+* Base class: Abstract type which oversees the previous command that was output and leaves execute and check functions to be defined in child classes.
+* Connector class: Composite class which inherits from Rshell and contains the connectors And, Or, Semicolon.
+* Op class: Leaf class that inherits from the base class where each object holds a single command to execute.
+* And class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command was a success.
+* Or class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command fails.
+* Semicolon class: Inherited class where objects represent a connector within a line of input and holds one command. Command will always execute regardless of the success or failure of the previous command. The first command in a list of commands is always from the Semicolon class.
+* tests/
+* Test.cpp: Google testing framework
 
 
 ## Prototypes/Research
