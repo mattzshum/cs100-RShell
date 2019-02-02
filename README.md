@@ -58,7 +58,7 @@ int main() {
 * For “exit”, the rest of the command line is ignored.
 * For “#”, the rest of the command line is entered as a comment.
 
-Every *syscall*, errors should be checked and perror should be called if an error does occur.
+> Note: For every *syscall*, errors should be checked and perror should be called if an error does occur.
 
 **Creaiting files, folders, and directories**
 * Creating folder “src/” for all source files. 
