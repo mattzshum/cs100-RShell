@@ -5,12 +5,11 @@
 class And: public Connector {
    //declare pointers and constructors
    private:
-      Base* first;
-      Base* second;
+      Base* lhs;
+      Base* rhs;
    public:
       And();
-      And(Base* first, Base* second);
-      And(Base* first, Command* second);
+      And(Base* left, Base* right);
       int execute();
 };
 #endif

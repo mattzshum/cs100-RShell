@@ -6,12 +6,11 @@
 class Semi: public Connector {
    //declare private pointers and constructors
    private:
-      Base* first;
-      Base* second;
+      Base* lhs;
+      Base* rhs;
    public:
       Semi();
-      Semi(Base* first, Base* second);
-      Semi(Base* first, Command* second);
+      Semi(Base* left, Base* right);  
       int execute();
 }
 #endif

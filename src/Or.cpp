@@ -13,18 +13,13 @@ using namespace std;
 #include "Or.h"
 
 Or::Or(){
-   first = 0;
-   second = 0;
+   lhs = 0;
+   rhs = 0;
 }
 
-Or::Or(Base* first, Base* second){
-   this->first = first;
-   this->second = second;
-}
-
-Or::Or(Base* first, Command* second){
-   this->first = first;
-   this->second = second;
+Or::Or(Base* left, Base* right){
+   this->lhs = left;
+   this->rhs = right;
 }
 
 //chcek status, if it returns a invalid value do nto run next command

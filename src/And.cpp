@@ -13,27 +13,22 @@ using namespace std;
 
 
 And::And(){
-   first = 0;
-   second = 0;
+   rhs = 0;
+   lhs = 0;
 }
 
-And::And(Base* first, Base* second){
-   this->first = first;
-   this->second = second;
-}
-
-And::And(Base* first, Command* second) {
-   this->first = first;
-   this->second = second;
+And::And(Base* left, Base* right){
+   this->rhs = right;
+   this->lhs = left;
 }
 
 int And::execute(){
    int status = 0;
-   status = first->execute();
+   status = lhs->execute();
    if(status != 0){
       return -1;
    } else {
-      status = second->execute();
+      status = rhs->execute();
       if(status != 0){
          return -1;
       }

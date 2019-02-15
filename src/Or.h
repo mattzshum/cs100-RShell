@@ -6,12 +6,11 @@
 class Or: public Connector{
    //declare constructors and member pointers
    private:
-      Base* first;
-      Base* second;
+      Base* lhs;
+      Base* rhs;
    public:
       Or();
-      Or(Base* first, Connector* second);
-      Or(Base* first, Base* second);
+      Or(Base* left, Base* right);
       int execute();
 };
 #endif
