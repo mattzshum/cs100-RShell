@@ -10,25 +10,21 @@
 
 using namespace std;
 
-#include "Or.h"
+#include "Semi.h"
 
-Or::Or(){
+Semi::Semi(){
    lhs = 0;
    rhs = 0;
 }
 
-Or::Or(Base* left, Base* right){
+Semi::Semi(Base* left, Base* right){
    this->lhs = left;
    this->rhs = right;
 }
 
-//chcek status, if it returns a invalid value do nto run next command
-int Or::execute(){
+int Semi::execute(){
    int status = 0;
+   status = rhs->execute();
    status = lhs->execute();
-   if(status!=0){
-      status = rhs->execute();
-      return status;
-   }
    return status;
 }

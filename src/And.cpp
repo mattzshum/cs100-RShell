@@ -9,7 +9,7 @@
 #include <unistd.h>
 using namespace std;
 
-#include "Connector.h"
+#include "And.h"
 
 
 And::And(){
