@@ -16,6 +16,10 @@ queue<string> parseCmd(string input){
     bool tookLoop = false;
     bool isCmd = true;
    // char *charStr;
+    if(input.find("#") != string::npos){
+        int comment = input.find("#");
+        input = input.substr(0,comment);
+    }
     string userInput = input;
     string tempStr;
     string addString = "";
@@ -81,10 +85,7 @@ int main(){
     queue<string> outputQ;
     
    //implement to remvoe anything past a "#" cahracter"
-   if(userInput.find("#") != string::npos){
-    int comment = userInput.find("#");
-    userInput = userInput.substr(0,comment);
-   }
+
    //if the string is more than one arguement
       outputQ = parseCmd(userInput);
   
