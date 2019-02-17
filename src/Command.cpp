@@ -21,7 +21,7 @@ int Command::execute() {
     for (int i = 0; i < cmdlist.size(); ++i) {
         args[i] = cmdlist.at(i);
     }
-    args[cmdlist.size() + 1] = NULL;
+    args[cmdlist.size()] = NULL;
 
     pid_t pid = fork();
 
