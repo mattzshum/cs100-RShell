@@ -1,26 +1,29 @@
 #include "Connector.h"
 
-Connector::Connector() {
-    lhs = 0;
-    rhs = 0;
-}
+Connector::Connector() 
+{}
 
-Connector::Connector(Base* left, Base* right) {
+Connector::Connector(Base* left, Base* right, string c) {
     lhs = left;
     rhs = right;
+    cnctr = c;
 }
 
 int Connector::execute() {
-    int status = 0;
-    status = lhs->execute();
-    if (status != 0) {
-        return -1;
-    }  
-    else {
-        status = rhs->execute();
-        if (status != 0) {
-            return -1;
+    int status = -1;
+    if (cnctr == "&&") {
+        if (lhs->execute()) {
+            rhs->execute();
         }
+    }
+    else if (cnctr == "||") {
+        if (!lhs->execute()) {
+            rhs->execute();
+        }
+    }
+    else {
+        lhs->execute();
+        rhs->execute();
     }
     return status;
 }
