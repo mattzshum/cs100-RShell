@@ -8,9 +8,7 @@
 
 using namespace std;
 
-queue<string> parseCmd(string input){
-    queue<string> allCmds;
-    stack<string> operators;
+void parseCmd(string input, queue<string> &allCmds, stack<string> &operators){
     int zero = 0;
     int tempInt;
     bool tookLoop = false;
@@ -72,22 +70,22 @@ queue<string> parseCmd(string input){
     addString = "";
     //cout << "tempStr2: " << tempStr << endl;
     //cout << "opertaror top: " << operators.top() << endl;
-    while(!operators.empty()){
-        allCmds.push(operators.top());
-        operators.pop();
-    }
-    return allCmds;
+    // while(!operators.empty()){
+    //     allCmds.push(operators.top());
+    //     operators.pop();
+    // }
+    return;
 }
 
 int main(){
     string userInput;
     getline(cin, userInput);
     queue<string> outputQ;
-    
+    stack<string> ops;
    //implement to remvoe anything past a "#" cahracter"
 
    //if the string is more than one arguement
-      outputQ = parseCmd(userInput);
+    parseCmd(userInput, outputQ, ops);
   
    // implement execute outputQ
    //cout << "now calling from the main:" << endl;
