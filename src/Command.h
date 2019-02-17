@@ -19,7 +19,6 @@ class Command : public Base {
         Command();
         Command(char* cmd);
         Command(vector<char*> cmdlist);
-        Command(char* cmd, vector<char*> cmdlist);
         virtual int execute();
 };
 
