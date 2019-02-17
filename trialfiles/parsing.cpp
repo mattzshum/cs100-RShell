@@ -19,7 +19,7 @@ queue<string> parseCmd(string input){
     string userInput = input;
     string tempStr;
     string addString = "";
-    cout << "fucntion testing each parse:" << endl;
+    //cout << "fucntion testing each parse:" << endl;
     while(userInput.find(" ") != string::npos){
       tookLoop = true;
       tempInt = userInput.find(" ");
@@ -42,30 +42,32 @@ queue<string> parseCmd(string input){
         isCmd = false;
         addString = "";
         operators.push(tempStr);
-        cout << "operators push :" << tempStr << endl;
+        //cout << "operators push :" << tempStr << endl;
       } else if (isCmd = true){
         if(addString == ""){
             addString = addString + tempStr;
         } else {
             addString = addString + " " + tempStr;
         }
-        cout << "addString: " << addString << endl;
+        //cout << "addString: " << addString << endl;
       } else {
           isCmd = true;
         tempStr = addString + tempStr;
         allCmds.push(tempStr);
         addString = "";
-        cout << "tempStr: " << tempStr << endl;
+        //cout << "tempStr: " << tempStr << endl;
       }
       userInput = userInput.substr(tempInt+1,userInput.size()-1);
       isCmd = true;
     }
     tempStr = userInput.substr(0,userInput.size());
-    tempStr = addString + tempStr;
+    if (addString != ""){
+        tempStr = addString + " " + tempStr;
+    }
     allCmds.push(tempStr);
     addString = "";
-    cout << "tempStr2: " << tempStr << endl;
-    cout << "opertaror top: " << operators.top() << endl;
+    //cout << "tempStr2: " << tempStr << endl;
+    //cout << "opertaror top: " << operators.top() << endl;
     while(!operators.empty()){
         allCmds.push(operators.top());
         operators.pop();
@@ -87,7 +89,7 @@ int main(){
       outputQ = parseCmd(userInput);
   
    // implement execute outputQ
-   cout << "now calling from the main:" << endl;
+   //cout << "now calling from the main:" << endl;
     while(!outputQ.empty()){
         cout << outputQ.front() << endl;
         outputQ.pop();
