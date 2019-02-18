@@ -2,10 +2,8 @@
 
 using namespace std;
 
-Command::Command() {
-    cmd = 0;
-    vector<char*> cmdlist = {};
-}
+Command::Command()
+{}
 
 Command::Command(char* input) {
     cmd = input;
@@ -19,11 +17,11 @@ Command::Command(vector<char*> cmdlist) {
 
 int Command::execute() {
     int status = 0;
-    char* args[100];
+    char* args[500];
     for (int i = 0; i < cmdlist.size(); ++i) {
         args[i] = cmdlist.at(i);
     }
-    args[cmdlist.size() + 1] = NULL;
+    args[cmdlist.size()] = NULL;
 
     pid_t pid = fork();
 

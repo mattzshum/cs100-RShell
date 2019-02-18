@@ -12,6 +12,6 @@ class Semi: public Connector {
       Semi();
       Semi(Base* left, Base* right);  
       int execute();
-}
-#endif
+};
 
+#endif
