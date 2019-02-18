@@ -7,6 +7,7 @@
 #include <sstream>
 #include <stdio.h>
 #include <unistd.h>
+
 using namespace std;
 
 #include "And.h"

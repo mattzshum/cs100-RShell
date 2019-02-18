@@ -8,7 +8,7 @@ Command::Command()
 Command::Command(char *input) {
     cmd = input;
     vector<char *> inlist;
-    // input += '\0'; 
+    input += '\0'; 
     inlist.push_back(input);
     cmdlist = inlist;
     cout << "construct" << endl;
@@ -16,6 +16,8 @@ Command::Command(char *input) {
 
 Command::Command(vector<char *> cmdlist) {
     this->cmdlist = cmdlist;
+        //cout << "construct" << endl;
+
 }
 
 int Command::execute() {
@@ -24,15 +26,28 @@ int Command::execute() {
     for (int i = 0; i < cmdlist.size(); ++i) {
         args[i] = cmdlist.at(i);
     }
+
+    // char *args[2];
+    // args[0] = 
     pid_t pid = fork();
+    
+    // if (!cmd.empty()) {
+	// 		cmds.push_back(this->buildCommand(cmd));
+	// 	} else if (commands.front() == ";") {
+	// 		cmds.push_back(new Terminate()); 
+	// 		commands.pop_front();
+	// 	} else if (commands.front() == "||") {
+	// 		cmds.push_back(new Or()); 
+	// 		commands.pop_front();
+	// 	} else if (commands.front() == "&&") {
+	// 		cmds.push_back(new And());
+
     if (pid == -1) {
         perror("Error: fork");
     }
 
-    else if (pid == 0)
-    {
-        if (execvp(this->cmd, args) == -1)
-        {
+    else if (pid == 0) {
+        if (execvp(args[0], args) == -1) {
             status = 0;
             perror("Error: execvp");
             exit(1);
