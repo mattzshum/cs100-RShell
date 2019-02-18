@@ -52,6 +52,9 @@ void parseTokenizer(char *str) {
     }
 
     if (temp.size() > 0) {
+        if (temp[temp.size() - 1] == ' ') {
+            temp.erase(temp.begin() + temp.size() - 1);
+        }
         combined.push_back(temp);
     }
 
@@ -60,9 +63,26 @@ void parseTokenizer(char *str) {
     for (int i = 0; i < combined.size(); ++i) {
         cout << combined.at(i) << endl; 
     }
+
+    vector<char*> output(combined.size());
+    for (int i = 0; i < output.size(); ++i) {
+        char* temp = new char[combined.at(i).length() + 1];
+        strcpy(temp, combined.at(i).c_str());
+        output.at(i) = temp;
+    }
+
+    cout << "char* vector: " << endl; 
+    for (int i = 0; i < output.size(); ++i){
+       cout << output.at(i) << endl;
+    }
+
+    for (int i = 0; i < output.size(); ++i) {
+        Command* cmd = new Command(output.at(i));
+        cmd->execute();
+    }
 }
 
-int main() {
+int main(int argc, char** argv) {
 
     cout << '$' << " ";
     string userInput;
