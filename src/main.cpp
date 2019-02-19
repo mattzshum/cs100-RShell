@@ -1,5 +1,9 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cctype>
 #include <string>
+#include <iterator>
 #include <queue>
 #include <cstring>
 #include <stack>
@@ -9,10 +13,13 @@
 #include "Command.h"
 #include "Base.h"
 #include "Connector.h"
+#include "And.h"
+#include "Or.h"
+#include "Semi.h"
 
 using namespace std;
 
-void parseTokenizer(char *str) {
+vector<string> parseTokenizer(char *str) {
     char *token;
     //cout << "Check:" << endl;
     token = strtok(str, " ,.");
@@ -64,35 +71,63 @@ void parseTokenizer(char *str) {
         cout << combined.at(i) << endl; 
     }
 
-    vector<char*> output(combined.size());
-    for (int i = 0; i < output.size(); ++i) {
-        char* temp = new char[combined.at(i).length() + 1];
-        strcpy(temp, combined.at(i).c_str());
-        output.at(i) = temp;
-    }
-
-    cout << "char* vector: " << endl; 
-    for (int i = 0; i < output.size(); ++i){
-       cout << output.at(i) << endl;
-    }
-
-    for (int i = 0; i < output.size(); ++i) {
-        Command* cmd = new Command(output.at(i));
-        cmd->execute();
-    }
+    return combined;
 }
 
-int main(int argc, char** argv) {
-
-    cout << '$' << " ";
+int main() {
     string userInput;
-
+    vector<string> store;
+    
     while (true) {
+        cout << '$' << " ";
         char userInput[1024];
+        userInput[1023] = '\0';
         cin.getline(userInput, 1024);
-        parseTokenizer(userInput);
-    }
+        vector<string> cmdline;
+        char* args[2];
+        cmdline = parseTokenizer(userInput);
+        string justCmd;
+        string justCmds;
+        string restCmds;
+        
+        for (int i = 0; i < cmdline.size(); ++i) {
+            if (cmdline.at(i).find(" ")) {
+                justCmds = cmdline.at(i).substr(0, cmdline.at(i).find_first_of(" "));
+                restCmds = cmdline.at(i).substr(cmdline.at(i).find_first_of(" ") + 1, cmdline.at(i).length());
+            }
+            else {
+                justCmds = cmdline.at(i);
+                restCmds = "";
+            }
+        }
 
+        args[0] = (char*)justCmds.c_str();
+        args[1] = (char*)restCmds.c_str();
+
+        pid_t pid = fork();
+
+        if (pid == -1) {
+            perror("Error: fork");
+        }
+
+        else if (pid == 0) {
+            if (execvp(args[0], args) == -1) {
+                perror("Error: execvp");
+                exit(1);
+            }
+        }
+        else {
+            int check;
+            if (waitpid(pid, &check, 0) == 1) {
+                perror("Wait");
+            }
+            if (WEXITSTATUS(check) != 0) {
+                exit(1);
+            }
+        }
+    
+        
+    }
     
     return 0;
 }
