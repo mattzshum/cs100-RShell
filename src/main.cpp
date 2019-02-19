@@ -26,11 +26,11 @@ vector<string> parseTokenizer(char *str) {
     // cout << token << endl;
     vector<string> cmdline;
 
-    cout << "Before" << endl;
+    //cout << "Before" << endl;
     // uses strtok to get rid of delimiters (chars we want to ignore) 
     while (token != 0) {
         cmdline.push_back(token); //pushes what we want to keep into vector
-        cout << token << endl;
+        //cout << token << endl;
         token = strtok(0, " ,.");
     }
     // cmdline vector is now filled with our "simplified" commands
@@ -65,11 +65,11 @@ vector<string> parseTokenizer(char *str) {
         combined.push_back(temp);
     }
 
-    cout << "After: " << endl; 
+    // cout << "After: " << endl; 
 
-    for (int i = 0; i < combined.size(); ++i) {
-        cout << combined.at(i) << endl; 
-    }
+    // for (int i = 0; i < combined.size(); ++i) {
+    //     cout << combined.at(i) << endl; 
+    // }
 
     return combined;
 }
@@ -88,11 +88,7 @@ int main() {
         cmdline = parseTokenizer(userInput);
         string justCmds;
         string restCmds;
-<<<<<<< HEAD
         bool oneCmd = false;
-=======
-        bool OneCmd = false;
->>>>>>> 77db411eea0a11a7bd1e188283a62a04c633ccc7
         
         for (int i = 0; i < cmdline.size(); ++i) {
             if (cmdline.at(i).find(" ") != string::npos) {
@@ -102,7 +98,6 @@ int main() {
             else {
                 justCmds = cmdline.at(i);
                 args[0] = (char*)justCmds.c_str();
-<<<<<<< HEAD
                 args[1] =  (char*)'\0';
                 oneCmd = true;
             }
@@ -113,16 +108,6 @@ int main() {
             args[1] = (char*)restCmds.c_str();
         }
 
-=======
-                args[1] = '\0';
-                OneCmd = true;
-            }
-        }
-        if(OneCmd == false){
-            args[0] = (char*)justCmds.c_str();
-            args[1] = (char*)restCmds.c_str();
-        }
->>>>>>> 77db411eea0a11a7bd1e188283a62a04c633ccc7
         pid_t pid = fork();
 
         if (pid == -1) {
