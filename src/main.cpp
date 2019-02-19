@@ -88,7 +88,11 @@ int main() {
         cmdline = parseTokenizer(userInput);
         string justCmds;
         string restCmds;
+<<<<<<< HEAD
         bool oneCmd = false;
+=======
+        bool OneCmd = false;
+>>>>>>> 77db411eea0a11a7bd1e188283a62a04c633ccc7
         
         for (int i = 0; i < cmdline.size(); ++i) {
             if (cmdline.at(i).find(" ") != string::npos) {
@@ -98,6 +102,7 @@ int main() {
             else {
                 justCmds = cmdline.at(i);
                 args[0] = (char*)justCmds.c_str();
+<<<<<<< HEAD
                 args[1] =  (char*)'\0';
                 oneCmd = true;
             }
@@ -108,6 +113,16 @@ int main() {
             args[1] = (char*)restCmds.c_str();
         }
 
+=======
+                args[1] = '\0';
+                OneCmd = true;
+            }
+        }
+        if(OneCmd == false){
+            args[0] = (char*)justCmds.c_str();
+            args[1] = (char*)restCmds.c_str();
+        }
+>>>>>>> 77db411eea0a11a7bd1e188283a62a04c633ccc7
         pid_t pid = fork();
 
         if (pid == -1) {
