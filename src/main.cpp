@@ -84,25 +84,29 @@ int main() {
         userInput[1023] = '\0';
         cin.getline(userInput, 1024);
         vector<string> cmdline;
-        char* args[2];
+        char* args[1];
         cmdline = parseTokenizer(userInput);
-        string justCmd;
         string justCmds;
         string restCmds;
+        bool oneCmd = false;
         
         for (int i = 0; i < cmdline.size(); ++i) {
-            if (cmdline.at(i).find(" ")) {
+            if (cmdline.at(i).find(" ") != string::npos) {
                 justCmds = cmdline.at(i).substr(0, cmdline.at(i).find_first_of(" "));
                 restCmds = cmdline.at(i).substr(cmdline.at(i).find_first_of(" ") + 1, cmdline.at(i).length());
             }
             else {
                 justCmds = cmdline.at(i);
-                restCmds = "";
+                args[0] = (char*)justCmds.c_str();
+                args[1] =  (char*)'\0';
+                oneCmd = true;
             }
         }
 
-        args[0] = (char*)justCmds.c_str();
-        args[1] = (char*)restCmds.c_str();
+        if (oneCmd == false) {
+            args[0] = (char*)justCmds.c_str();
+            args[1] = (char*)restCmds.c_str();
+        }
 
         pid_t pid = fork();
 
