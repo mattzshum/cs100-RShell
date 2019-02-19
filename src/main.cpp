@@ -89,21 +89,24 @@ int main() {
         string justCmd;
         string justCmds;
         string restCmds;
+        bool OneCmd = false;
         
         for (int i = 0; i < cmdline.size(); ++i) {
-            if (cmdline.at(i).find(" ")) {
+            if (cmdline.at(i).find(" ") != string::npos) {
                 justCmds = cmdline.at(i).substr(0, cmdline.at(i).find_first_of(" "));
                 restCmds = cmdline.at(i).substr(cmdline.at(i).find_first_of(" ") + 1, cmdline.at(i).length());
             }
             else {
                 justCmds = cmdline.at(i);
-                restCmds = "";
+                args[0] = (char*)justCmds.c_str();
+                args[1] = '\0';
+                OneCmd = true;
             }
         }
-
-        args[0] = (char*)justCmds.c_str();
-        args[1] = (char*)restCmds.c_str();
-
+        if(OneCmd == false){
+            args[0] = (char*)justCmds.c_str();
+            args[1] = (char*)restCmds.c_str();
+        }
         pid_t pid = fork();
 
         if (pid == -1) {
