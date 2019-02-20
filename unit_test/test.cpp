@@ -119,11 +119,31 @@ TEST(Command, ls){
 } 
 
 TEST(Command, echo){
-   Command* test = new Command("echo");
+   Command* test = new Command("echo hello world");
    EXPECT_EQ(1,test->execute());
 } 
 
-TEST(Command, mkdir){
+TEST(Command, echo2){
+   Command* test = new Command("echo this is a long string with many words");
+   EXPECT_EQ(1,test->execute());
+} 
+
+TEST(Command, echo3){
+   Command* test = new Command("echo now we're going to try this with space ");
+   EXPECT_EQ(1,test->execute());
+} 
+
+TEST(Command, echo4){
+   Command* test = new Command("echo check if we can output &");
+   EXPECT_EQ(1,test->execute());
+} 
+
+TEST(Command, echo5){
+   Command* test = new Command("echo quotes with");
+   EXPECT_EQ(1,test->execute());
+} 
+
+TEST(Command, mkdir6){
    Command* test = new Command("mkdir");
    EXPECT_EQ(1,test->execute());
 } 
