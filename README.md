@@ -67,11 +67,13 @@ int main() {
 * An “Integration_tests/” directory should also contain all the integration test. 
 * The root directory must also include two targets, the rshell, which should build the main executable, and the test which should run the unit test that have been created using the Google Unit Test Framework. 
 * Any temp files and machine specific files should be added to the .gitignore.
+* Contain file including names, SIDs, and emails of group members
 
 > Note: Main test file can be in "unit_test/" or "src/"
 
 **Creating helper functions for implementation**
 * Parsing: Parsing will be done by storing input line within a vector. Elements will be separated through the use of *strtok* which we will then further divide based on commands and connectors. This will be achieved through the use of substrings to sort the contents of the string vector.
+* Shunting Yard: We will incorporate shunting yard algorithm in order to construct a tree hierarchy to determine the ordering of execution. We need the commands to execute according to the specific connectors that are passed in with them during input. This will dictate the commands and their arguments entered to execute with correct precedence.
 
 ## Development and Testing Roadmap
 * Development will be carried out with continued communication and collaboration
