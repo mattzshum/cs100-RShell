@@ -70,6 +70,9 @@ int main() {
 
 > Note: Main test file can be in "unit_test/" or "src/"
 
+**Creating helper functions for implementation**
+* Parsing: Parsing will be done by storing input line within a vector. Elements will be separated through the use of *strtok* which we will then further divide based on commands and connectors. This will be achieved through the use of substrings to sort the contents of the string vector.
+
 ## Development and Testing Roadmap
 * Development will be carried out with continued communication and collaboration
 * Plan out and agree upon our objective and approach towards utilizing fork, waitpid, and execvp
