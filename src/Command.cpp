@@ -8,25 +8,27 @@ Command::Command()
 Command::Command(char *input) {
     cmd = input;
     vector<char *> inlist;
-    input += '\0'; 
     inlist.push_back(input);
+    inlist.push_back('\0');
+    inlist.push_back('\0');
     cmdlist = inlist;
-    cout << "construct" << endl;
+    //cout << "construct char" << endl;
 }
 
 Command::Command(vector<char *> cmdlist) {
     this->cmdlist = cmdlist;
-        //cout << "construct" << endl;
+        // cout << cmdlist.at(0) << endl;
+        // cout << cmdlist.at(1) << endl;
+        // cout << "construct vector" << endl;
 
 }
 
 int Command::execute() {
     int status = 1;
-    char *args[500];
-    for (int i = 0; i < cmdlist.size(); ++i) {
-        args[i] = cmdlist.at(i);
-    }
-
+    char* args[3];
+    args[0] = cmdlist.at(0);
+    args[1] = cmdlist.at(1);
+    args[2] = (char*)'\0';
     // char *args[2];
     // args[0] = 
     pid_t pid = fork();
@@ -47,10 +49,10 @@ int Command::execute() {
     }
 
     else if (pid == 0) {
+        //cout <<  "args[0" << args[0] << endl; 
         if (execvp(args[0], args) == -1) {
             status = 0;
             perror("Error: execvp");
-            exit(1);
         }
     }
     else {
