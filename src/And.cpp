@@ -1,38 +1,23 @@
 #include <iostream>
-#include <string>
-#include <cstdlib>
-#include <fstream>
-#include <vector>
-#include <cmath>
-#include <sstream>
-#include <stdio.h>
-#include <unistd.h>
 
 using namespace std;
 
-#include "And.h"
+#include "and.h"
 
+And::And() {};
 
-And::And(){
-   rhs = 0;
-   lhs = 0;
+bool And::isConnector() {
+    return true;
 }
 
-And::And(Base* left, Base* right){
-   this->rhs = right;
-   this->lhs = left;
+bool And::execute() {
+    if (lhs->execute()) {
+        return rhs->execute();
+    }
+    return false;
 }
 
-int And::execute(){
-   int status = 0;
-   status = lhs->execute();
-   if(status != 0){
-      return -1;
-   } else {
-      status = rhs->execute();
-      if(status != 0){
-         return -1;
-      }
-   }
-   return status;
+void And::setBase(Base* a, Base* b) {
+    lhs = a;
+    rhs = b;
 }
