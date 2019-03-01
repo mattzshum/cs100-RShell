@@ -1,4 +1,4 @@
-#include "semiColon.h"
+#include "../header/semiColon.h"
 
 using namespace std;
 

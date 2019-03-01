@@ -8,13 +8,13 @@
 #include <iostream>
 #include <vector>
 
-#include "rshell.h"
+#include "../header/rshell.h"
 
-#include "or.h"
-#include "semiColon.h"
-#include "and.h"
-#include "connector.h"
-#include "command.h"
+#include "../header/or.h"
+#include "../header/semiColon.h"
+#include "../header/and.h"
+#include "../header/connector.h"
+#include "../header/command.h"
 
 using namespace std;
 using namespace boost;

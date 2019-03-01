@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#include "and.h"
+#include "../header/and.h"
 
 And::And() {};
 
