@@ -1,17 +1,17 @@
 #include <iostream>
 
-#include "../header/rshell.h"
+#include "rshell.h"
 
 using namespace std;
 
-int main() {
+int main(){
     rShell run;
     string commandLine;
-    while (commandLine != "exit") {
+    while(commandLine != "exit"){
         run.display();
         getline(cin, commandLine);
         cout << endl;
-        if (commandLine == "exit") {
+        if(commandLine == "exit"){
             break;
         }
         run.parse(commandLine);
