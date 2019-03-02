@@ -1,13 +1,13 @@
 # CS 100 Programming Project
 
 Product Information
-> Author(s): Darrien Gunn (862030886), Christian Lee (862053682)
+> Author(s): Matthew Shum (862009656), Christian Lee (862053682)
 > Winter 2019
 
 ## Introduction
 We will be developing a command shell (Rshell) in C++ that will be able to print command prompts, read in commands and connectors from standard input, and execute the appropriate commands using _execvp_, _waitpid_, and _fork_. A shell is a user interface which accesses an operating system’s services. Specific characters (commands) will be used to provide instructions and send data to the operating system. 
 
-Rshell will be able to handle inputs without limit to the number of commands chained together through connections as well as any combination of operators. Since this program is structural/object focused, we will use composite pattern to represent the hierarchies of our classes. 
+Rshell will be able to handle inputs without limit to the number of commands chained together through connections as well as any combination of operators. Since this program is structural/object focused, we will use composite pattern to represent the hierarchies of our classes. Our program will make sure to take precedence i.e. parentheses into account when reading in different commands along with their connectors. Rshell will also be able to handle test commands [] with flags (-e, -f, -d). 
 
 Following the **composite** design pattern, our composite class will be the *Connector* class along with a *leaf* class called Operator.
 
@@ -19,11 +19,14 @@ Following the **composite** design pattern, our composite class will be the *Con
 * Root directory: Contains files (README.md, src/, tests/, CMakeLists.txt)
 * src/
   * Base class: Abstract type which oversees the previous command that was output and leaves execute and check functions to be defined in child classes.
+  * Command class: Composite class that inherits from the base class where each object holds a single command to execute.
+  * NormCommand class : Inherited class where objects represent the basic "normal" commands that would be executed through the shell program.
+  * TestCommand class : Inherited class where objects represent the test commands that will be exectued as linux system based calls with flags *e, f,* and *d*.
   * Connector class: Composite class which inherits from Rshell and contains the connectors And, Or, Semicolon.
-  * Op class: Leaf class that inherits from the base class where each object holds a single command to execute.
   * And class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command was a success.
   * Or class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command fails.
   * Semicolon class: Inherited class where objects represent a connector within a line of input and holds one command. Command will always execute regardless of the success or failure of the previous command. The first command in a list of commands is always from the Semicolon class.
+  * Rshell class: Leaf class to handle the parsing of commands and build the structural design of commands read in for execution. 
 * tests/
   * Test.cpp: Google testing framework
 
@@ -72,14 +75,22 @@ int main() {
 > Note: Main test file can be in "unit_test/" or "src/"
 
 **Creating helper functions for implementation**
-* Parsing: Parsing will be done by storing input line within a vector. Elements will be separated through the use of *strtok* which we will then further divide based on commands and connectors. This will be achieved through the use of substrings to sort the contents of the string vector.
-* Shunting Yard: We will incorporate shunting yard algorithm in order to construct a tree hierarchy to determine the ordering of execution. We need the commands to execute according to the specific connectors that are passed in with them during input. This will dictate the commands and their arguments entered to execute with correct precedence.
+* Parsing: Parsing will be done by storing input line within a queue. Elements will be separated through the use of *tokenizer* which we will then further divide based on commands and connectors. This will be achieved through the use of substrings to sort the contents of the string queue.
+* Recursive Parsing: We will use parse recursively in order to take cases involving parentheses into account for precedence. This will allow us to handle commands along with their connectors and prioritize their execution before the execution of the rest of the command line.
+
+**Creating and implementing flags for test commands**
+* - e : checks if the file/directory exists
+* - f : checks if the file/directory exists and is a regular file
+* - d : checks if the file/directory exists and is a directory
+* Commands executed correctly will return *(True)*.
+* Commands executed incorrectly will return *(False)*.
 
 ## Development and Testing Roadmap
 * Development will be carried out with continued communication and collaboration
 * Plan out and agree upon our objective and approach towards utilizing fork, waitpid, and execvp
-* Christian: Responsible for Base, Op, Connector classes
-* Darrien: Responsible for And, Or, Semicolon classes
+* Team members will utilize time most effectively through meeting up and actively communicating/designing/implementing. This ensures that work will be accomplished onto with any and all issues being addressed immediately.
+* Remain in contact throughout the course of program implementation to keep track of progress.
+* Coding will be done remotely as well as in person to optimize work flow.
 * Implement test cases together and review each other’s work 
 * Integrate divided work by merging branches on Github once agreed upon
 
