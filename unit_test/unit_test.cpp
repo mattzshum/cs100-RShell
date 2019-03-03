@@ -1,14 +1,14 @@
-#include "rshell.h"
-#include "base.h"
-#include "command.h"
-#include "connector.h"
+#include "../src/rshell.h"
+#include "../src/base.h"
+#include "../src/command.h"
+#include "../src/connector.h"
 
-#include "and.h"
-#include "or.h"
-#include "semicolon.h"
+#include "../src/and.h"
+#include "../src/or.h"
+#include "../src/semicolon.h"
 
-#include "normcommand.h"
-#include "testcommand.h"
+#include "../src/normcommand.h"
+#include "../src/testcommand.h"
 
 #include "gtest/gtest.h"
 
@@ -18,7 +18,7 @@ using namespace std;
 
 TEST(simpleCommand, simpleCommand){
     rShell run;
-    string commandLine = "echo A && echo B || ls || ls -a"
+    string commandLine = "echo A && echo B || ls || ls -a";
     run.parse(commandLine);
     run.createExecuteList();
     EXPECT_EQ(run.Run(), run.Run());
