@@ -28,11 +28,11 @@ TEST(simpleCommand, simpleCommand){
 
 TEST(testCommandTrue, testCommandTrue){
     string commandLine = "test -e main.cpp";
-    Base* lhs = new normCommand(commandLine);
+    Base* lhs = new TestCommand(commandLine);
     EXPECT_EQ(lhs->execute(), lhs->execute());
 }
 
-Test(testCommandFalse, testCommandFalse){
+TEST(testCommandFalse, testCommandFalse){
     string falseTest = "test -e false.cpp";
     Base* lhs = new TestCommand(falseTest);
     EXPECT_EQ(lhs->execute(), lhs->execute());
