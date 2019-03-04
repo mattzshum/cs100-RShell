@@ -4,6 +4,11 @@ ADD_SUBDIRECTORY(googletest)
 
 SET(CMAKE_CXX_STANDARD 11)
 
+INCLUDE_DIRECTORIES (
+    src
+    $ {CMAKE_SOURCE_DIR}/assignment-cs-100-darrien-christian/src
+)
+
 ADD_EXECUTABLE(rshell
     src/main.cpp
     src/rshell.cpp
@@ -18,7 +23,5 @@ ADD_EXECUTABLE(test
     src/testcommand.cpp
 )
 
-TARGET_LINK_LIBRARIES(rshell gtest)
 
 TARGET_LINK_LIBRARIES(test gtest)
-TARGET_COMPILE_DEFINITIONS(rshell PRIVATE gtest_desable_pthreads = ON)

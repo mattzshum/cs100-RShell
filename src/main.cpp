@@ -8,8 +8,6 @@
 #include "or.h"
 #include "semicolon.h"
 
-#include "gtest/gtest.h"
-
 #include <iostream>
 
 using namespace std;
