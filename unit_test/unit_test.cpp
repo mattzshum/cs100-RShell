@@ -1,4 +1,3 @@
-//#://github.com/cs100/assignment-cs-100-darrien-christian.gitinclude "../src/rshell.h"
 #include "../src/base.h"
 #include "../src/command.h"
 #include "../src/connector.h"
@@ -32,8 +31,56 @@ TEST(testCommandTrue, testCommandTrue){
     EXPECT_EQ(lhs->execute(), lhs->execute());
 }
 
+TEST(testCommandTrue, testCommandTrue2){
+    string commandLine = "test -e rshell.cpp";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandTrue, testCommandTrue3){
+    string commandLine = "test -e command.h";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandTrue, testCommandTrue4){
+    string commandLine = "test -e and.h";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandTrue, testCommandTrue5){
+    string commandLine = "test -e or.h";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
 TEST(testCommandFalse, testCommandFalse){
     string falseTest = "test -e false.cpp";
+    Base* lhs = new TestCommand(falseTest);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandFalse, testCommandFalse2){
+    string falseTest = "test -e fake.cpp";
+    Base* lhs = new TestCommand(falseTest);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandFalse, testCommandFalse3){
+    string falseTest = "test -e dob.cpp";
+    Base* lhs = new TestCommand(falseTest);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandFalse, testCommandFalse4){
+    string falseTest = "test -e bob.cpp";
+    Base* lhs = new TestCommand(falseTest);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandFalse, testCommandFalse5){
+    string falseTest = "test -e whack.cpp";
     Base* lhs = new TestCommand(falseTest);
     EXPECT_EQ(lhs->execute(), lhs->execute());
 }
@@ -44,11 +91,42 @@ TEST(testCommandBracket, testCommandBracket){
     EXPECT_EQ(lhs->execute(), lhs->execute());
 }
 
+TEST(testCommandBracket, testCommandBracket2){
+    string commandLine = "[-e and.h]";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandBracket, testCommandBracket3){
+    string commandLine = "[-e rshell.cpp]";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandBracket, testCommandBracket4){
+    string commandLine = "[-e normcommand.cpp]";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
+TEST(testCommandBracket, testCommandBracket5){
+    string commandLine = "[-e testcommand.cpp]";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
 TEST(testFlagF, testFlagF){
     string commandLine = "test -f main.cpp";
     Base* lhs = new TestCommand(commandLine);
     EXPECT_EQ(lhs->execute(), lhs->execute());
 }
+
+TEST(testFlagF, testFlagF2){
+    string commandLine = "test -f rshell.cpp";
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
+}
+
 
 TEST(testFlagD, testFlagD){
     string commandLine = "test -d main.cpp";
