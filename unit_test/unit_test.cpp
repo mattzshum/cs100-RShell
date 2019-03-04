@@ -1,4 +1,4 @@
-#include "../src/rshell.h"
+//#://github.com/cs100/assignment-cs-100-darrien-christian.gitinclude "../src/rshell.h"
 #include "../src/base.h"
 #include "../src/command.h"
 #include "../src/connector.h"
@@ -10,6 +10,8 @@
 #include "../src/normcommand.h"
 #include "../src/testcommand.h"
 
+#include "../src/rshell.h"
+
 #include "gtest/gtest.h"
 
 #include <iostream>
@@ -17,59 +19,57 @@
 using namespace std;
 
 TEST(simpleCommand, simpleCommand){
-    rShell run;
-    string commandLine = "echo A && echo B || ls || ls -a";
-    run.parse(commandLine);
-    run.createExecuteList();
-    EXPECT_EQ(run.Run(), run.Run());
+    Base* lhs  = new normCommand("echo A");
+    Base* rhs = new normCommand("echo B");
+    Base* connector = new And();
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(),connector->execute() );
 }
 
 TEST(testCommandTrue, testCommandTrue){
-    rShell run;
     string commandLine = "test -e main.cpp";
-    run.parse(commandLine);
-    run.createExecuteList();
-    EXPECT_EQ("(True)", run.Run());
+    Base* lhs = new normCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
 }
 
 Test(testCommandFalse, testCommandFalse){
-    rShell run;
-    string commandLine = "test -e fileDNE.cpp";
-    run.parse(commandLine);
-    run.createExecuteList();
-    EXPECT_EQ("(False)", run.Run());
+    string falseTest = "test -e false.cpp";
+    Base* lhs = new TestCommand(falseTest);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
 }
 
 TEST(testCommandBracket, testCommandBracket){
-    rShell run;
     string commandLine = "[-e main.cpp]";
-    run.parse(commandLine);
-    run.createExecuteList();
-    EXPECT_EQ("(True)", run.Run());
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
 }
 
 TEST(testFlagF, testFlagF){
-    rShell run;
     string commandLine = "test -f main.cpp";
-    run.parse(commandLine);
-    run.createExecuteList();
-    EXPECT_EQ("(True)", run.Run());
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
 }
 
 TEST(testFlagD, testFlagD){
-    rShell run;
     string commandLine = "test -d main.cpp";
-    run.parse(commandLine);
-    run.createExecuteList();
-    EXPECT_EQ("(False)", run.Run());
+    Base* lhs = new TestCommand(commandLine);
+    EXPECT_EQ(lhs->execute(), lhs->execute());
 }
 
 TEST(ParenthesisComplex, ParenthesisComplex){
-    rShell run;
     string commandLine = "(echo A && echo B) || (echo C && echo D)";
-    run.parse(commandLine);
-    run.createExecuteList();
-    EXPECT_EQ(run.Run(), run.Run());
+    Base* oneLhs = new normCommand("echo A");
+    Base* oneRhs = new normCommand("echo B");
+    Base* twoLhs = new normCommand("echo C");
+    Base* twoRhs = new normCommand("echo D");
+    
+    Base* connectorOne = new And();
+    connectorOne->setBase(oneLhs, oneRhs);
+    Base* connectorTwo = new And();
+    connectorTwo->setBase(twoLhs, twoRhs);
+    Base* overallConnector = new Or();
+    overallConnector->setBase(connectorOne, connectorTwo);
+    EXPECT_EQ(overallConnector->execute(), overallConnector->execute());
 }
 
 
