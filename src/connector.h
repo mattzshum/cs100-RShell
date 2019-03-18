@@ -22,7 +22,8 @@ class Connector : public Base{
     
     virtual bool isConnector() = 0;
     virtual void setBase(Base* a, Base* b) = 0;
-    virtual bool execute() = 0;
+    string getCommand() { return ""; }
+    virtual bool execute(int, int) = 0;
 };
 
 #endif
