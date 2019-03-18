@@ -13,9 +13,11 @@ class And : public Connector{
       return true;
     }
     
-    bool execute() {
-        if(lhs->execute()){
-            return rhs->execute();
+    string getCommand() { return "";}
+    
+    bool execute(int in, int out) {
+        if(lhs->execute(0,0)){
+            return rhs->execute(0,0);
         }
         return false;
     }
