@@ -20,6 +20,7 @@ using namespace std;
 class Command : public Base{
   protected:
     //executablel [arg list] [connector] [cmd]
+    string cmd;
     Base * lhs;
     Base * rhs;
     
@@ -30,8 +31,9 @@ class Command : public Base{
     Command(string command) : lhs(0), rhs(0) {
         cmd = command;
     };
+    string getCommand() { return cmd; }
     virtual bool isConnector() = 0;
     virtual void setBase(Base*, Base*) = 0;
-    virtual bool execute() = 0;
+    virtual bool execute(int, int) = 0;
 };
 #endif
