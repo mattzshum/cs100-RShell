@@ -16,7 +16,7 @@ Following the **composite** design pattern, our composite class will be the *Con
 ![example expression tree](images/Assignment%201%20UML.png?raw=true "Diagram")
       
 ## Classes
-* Root directory: Contains files (README.md, src/, tests/, CMakeLists.txt)
+* Root directory: Contains files (README.md, src/, unit_tests/, integration_test/, CMakeLists.txt)
 * src/
   * Base class: Abstract type which oversees the previous command that was output and leaves execute and check functions to be defined in child classes.
   * Command class: Composite class that inherits from the base class where each object holds a single command to execute.
@@ -27,9 +27,10 @@ Following the **composite** design pattern, our composite class will be the *Con
   * Or class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command fails.
   * Semicolon class: Inherited class where objects represent a connector within a line of input and holds one command. Command will always execute regardless of the success or failure of the previous command. The first command in a list of commands is always from the Semicolon class.
   * Rshell class: Leaf class to handle the parsing of commands and build the structural design of commands read in for execution. 
-* tests/
-  * Test.cpp: Google testing framework
-
+* unit_tests/
+  * unit_test.cpp: Google testing framework
+* integration_tests/
+  * Contains integration_tests.sh files for the different functions we will be taking
 
 ## Prototypes/Research
 
@@ -84,6 +85,12 @@ int main() {
 * - d : checks if the file/directory exists and is a directory
 * Commands executed correctly will return *(True)*.
 * Commands executed incorrectly will return *(False)*.
+
+**Add pipe, input redirection, output redirection, and double output redirection connectors**
+* - pipe : redirection to send the output of one command/process to another command/process for execution
+* - input redirection : takes in input and is redirected by calling "<"
+* - output redirection : takes in output from a file and is redirected by calling ">"
+* - double output redirection : takes in output and appends to a file by calling ">>"
 
 ## Development and Testing Roadmap
 * Development will be carried out with continued communication and collaboration
