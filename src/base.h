@@ -1,26 +1,29 @@
-#ifndef BASE_H
-#define BASE_H
+#ifndef CONNECTOR_H
+#define CONNECTOR_H
 
-#include <stdio.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <iostream>
+#include "base.h"
 
 using namespace std;
 
-class Base{
-  private: 
+/*
+Connectors act as the operands in lab3 and 4. They will purely execute what is passed into them and return a boolean value of whether or not it passed.
+The boolean it returns will be determined by the command it is assigned.
+*/
+
+
+
+class Connector : public Base{
+  protected:
+    Base* lhs;
+    Base* rhs;
     
   public:
-    Base() {};
+    Connector() : lhs(0), rhs(0) {};
     
-    virtual void setBase(Base*, Base*) = 0;
     virtual bool isConnector() = 0;
-    virtual bool execute() = 0;
-    
-    string cmd;
+    virtual void setBase(Base* a, Base* b) = 0;
+    string getCommand() { return ""; }
+    virtual bool execute(int, int) = 0;
 };
 
 #endif
