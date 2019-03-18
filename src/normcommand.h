@@ -17,7 +17,8 @@ class normCommand : public Command{
     normCommand(string);
     bool isConnector();
     void setBase(Base*, Base*);
-    bool execute();
+    bool execute(int, int);
+    string getCommand();
 };
 
 #endif
