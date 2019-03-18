@@ -13,12 +13,14 @@ class SemiColon : public Connector{
       return true;
     }
     
-    bool execute() {
-        lhs->execute();
-        rhs->execute();
+    bool execute(int in, int out) {
+        lhs->execute(0,0);
+        rhs->execute(0,0);
         
         return true;
     }
+    
+    string getCommand() { return "";}
     
     void setBase(Base* a, Base* b){
         lhs = a;
