@@ -163,6 +163,46 @@ TEST(carrotRight, carrotDoubleRight){
     EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
 }
 
+TEST(carrotRight, carrotDoubleRight2){
+    string commandLine = "ls -a >> inputFile2.txt";
+    Base* connector = new DoubleOutput();
+    Base* lhs = new normCommand("ls -a");
+    Base* rhs = new normCommand("inputFile2.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotRight, carrotDoubleRight3){
+    string commandLine = "ls -l >> inputFile3.txt";
+    Base* connector = new DoubleOutput();
+    Base* lhs = new normCommand("ls -l");
+    Base* rhs = new normCommand("inputFile3.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotRight, carrotDoubleRight4){
+    string commandLine = "ls -l >> inputFile4.txt";
+    Base* connector = new DoubleOutput();
+    Base* lhs = new normCommand("ls -l");
+    Base* rhs = new normCommand("inputFile4.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotRight, carrotDoubleRight5){
+    string commandLine = "ls -l >> existingInputFile.txt";
+    Base* connector = new DoubleOutput();
+    Base* lhs = new normCommand("ls -l");
+    Base* rhs = new normCommand("existingInputFile.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
 TEST(carrotLeft, carrotLeftSingle){
     string commandLine = "existingInputFile.txt < ls -a";
     Base* connector = new InputRedirect();
@@ -173,10 +213,90 @@ TEST(carrotLeft, carrotLeftSingle){
     EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
 }
 
+TEST(carrotLeft, carrotLeftSingle2){
+    string commandLine = "existingInputFile.txt < ls -l";
+    Base* connector = new InputRedirect();
+    Base* lhs = new normCommand("existingInputFile.txt");
+    Base* rhs = new normCommand("ls -l");
+
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotLeft, carrotLeftSingle3){
+    string commandLine = "inputFile3.txt < ls -a";
+    Base* connector = new InputRedirect();
+    Base* lhs = new normCommand("inputFile3.txt");
+    Base* rhs = new normCommand("ls -a");
+
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotLeft, carrotLeftSingle4){
+    string commandLine = "cat < existingInputFile.txt";
+    Base* connector = new InputRedirect();
+    Base* lhs = new normCommand("cat");
+    Base* rhs = new normCommand("existingInputFile.txt");
+
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotLeft, carrotLeftSingle5){
+    string commandLine = "inputFile4.txt < ls -l";
+    Base* connector = new InputRedirect();
+    Base* lhs = new normCommand("inputFile4.txt");
+    Base* rhs = new normCommand("ls -l");
+
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
 TEST(carrotRightSingle, carrotRightSingle){
     string commandLine = "ls -a > existingInputFile.txt";
     Base* connector = new OutputRedirect();
     Base* lhs = new normCommand("ls -a");
+    Base* rhs = new normCommand("existingInputFile.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotRightSingle, carrotRightSingle2){
+    string commandLine = "ls -l > existingInputFile.txt";
+    Base* connector = new OutputRedirect();
+    Base* lhs = new normCommand("ls -l");
+    Base* rhs = new normCommand("existingInputFile.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotRightSingle, carrotRightSingle3){
+    string commandLine = "echo hello > existingInputFile.txt";
+    Base* connector = new OutputRedirect();
+    Base* lhs = new normCommand("echo hello");
+    Base* rhs = new normCommand("existingInputFile.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotRightSingle, carrotRightSingle4){
+    string commandLine = "echo rshell rshell > existingInputFile.txt";
+    Base* connector = new OutputRedirect();
+    Base* lhs = new normCommand("echo rshell rshell");
+    Base* rhs = new normCommand("existingInputFile.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotRightSingle, carrotRightSingle5){
+    string commandLine = "echo hello && echo hi > existingInputFile.txt";
+    Base* connector = new OutputRedirect();
+    Base* lhs = new normCommand("echo hello && echo hi");
     Base* rhs = new normCommand("existingInputFile.txt");
     
     connector->setBase(lhs, rhs);
