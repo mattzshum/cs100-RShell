@@ -8,6 +8,8 @@ normCommand::normCommand(string command) : lhs(0), rhs(0) {
     cmd = command;
 }
 
+string normCommand::getCommand() { return cmd;}
+
 bool normCommand::isConnector(){
     return false;
 }
@@ -17,7 +19,7 @@ void normCommand::setBase(Base* a, Base* b){
     rhs = b;
 }
 
-bool normCommand::execute(){
+bool normCommand::execute(int in, int out){
     char ** args;
         
         istringstream iss(cmd);
@@ -63,6 +65,21 @@ bool normCommand::execute(){
             }
         }
         else if (pid == 0) {
+            //cout << "CHECK" << endl;
+            if (dup2(in, 0) == -1) {
+                perror("dup2");
+                return false;
+            }
+            
+            //cout << "INCHECK" << endl;
+            
+            if (dup2(out, 1) == -1 ) {
+                //cout << "Interior Check" << endl;
+                perror("dup2");
+                return false;
+            }
+            //cout << "CHECK2" << endl;
+            
             if (execvp(args[0], args) == -1) {
                 perror("exec");
                 exit(EXIT_FAILURE);
