@@ -17,6 +17,10 @@
 #include "command.h"
 #include "testcommand.h"
 #include "normcommand.h"
+#include "outputredirect.h"
+#include "inputredirect.h"
+#include "doubleoutput.h"
+#include "pipe.h"
 
 using namespace std;
 using namespace boost;
@@ -115,6 +119,10 @@ Base* rShell::recParse(string internalCommand) { //TODO
             }
         }
     }
+    if(connectorListRecursive.empty()){
+        Base* ret = cmdListRecursive.front();
+        return ret;
+    }
     Base* returnConnector = connectorListRecursive.front();
     connectorListRecursive.pop();
     Base* lhs = cmdListRecursive.front();
@@ -127,57 +135,76 @@ Base* rShell::recParse(string internalCommand) { //TODO
 
 void rShell::parse(string cmdLine){
     typedef tokenizer<char_separator<char> > tokenizer;
-    char_separator<char> split("", "&;|#()", drop_empty_tokens);
+    char_separator<char> split("", "&;|#()<>",drop_empty_tokens);
     tokenizer tokens(cmdLine, split);
+    tokenizer::iterator fol = tokens.begin(); // this is a token we would use to follow tok & check for double recurrences
     for(tokenizer::iterator tok = tokens.begin(); tok != tokens.end(); ++tok){
-        //cout << "Beginning parse iter again" << endl;
-        // << *(tok) << endl;
         if (*(tok) == "#") {
             break;
         }
-        
-        // cout << "CHECK PARENTHESES" << endl;
-        
-        //CHECK FOR PARENTHESES
         else if(*(tok) == "("){
             string internalCmd;
             tok++;
+            fol++;
             while(*(tok) != ")"){
                 internalCmd += *(tok);
                 tok++;
+                fol++;
             }
             cmdlist.push(recParse(internalCmd));
         }
         
-        
         else if(*(tok) == "|"){
-            tok++; 
-            //| always comes in pairs so must ++ to skip iteration 
-            
-            Base* oor = new Or();
-            connectorlist.push(oor);
+            fol++;
+            fol++; // Play around with. Creates OOR despite incrementing here
+            if((*fol) == "|"){
+                cout << "has created OOR" << endl;
+                tok++;
+                Base* oor = new Or();
+                connectorlist.push(oor);
+            }
+            else{
+                cout << "has created PIPE" << endl;
+                Base* pipe = new Pipe();
+                connectorlist.push(pipe);
+                //tok++;
+            }
         }
         else if(*(tok) == "&"){
             tok++;
+            fol++;
             Base* aand = new And();
             connectorlist.push(aand);
         }
         else if(*(tok) == ";"){
-            //do not need to skip, ; only has one iter
-            
             Base* semicolon = new SemiColon();
             connectorlist.push(semicolon);
+        }
+        else if((*tok) == "<"){
+            Base* inputredirect = new InputRedirect();
+            connectorlist.push(inputredirect);
+        }
+        else if((*tok) == ">"){
+            fol++;
+            fol++;
+            if((*fol) == ">"){
+                Base* doubleoutput = new DoubleOutput();
+                connectorlist.push(doubleoutput);
+                tok++;
+            }
+            else{
+                Base* outputredirect = new OutputRedirect();
+                connectorlist.push(outputredirect);
+            }
         }
         else{
             string toker = *(tok);
             while(toker.at(0) == ' '){ 
-                // this is to remove extra whitespaces
                 toker.erase(toker.begin());
                 if(toker == ""){
                     break;
                 }
             }
-            //this is where we should create test and norm commands
             if(toker != ""){
                 while(toker.at(toker.size()-1) == ' '){
                     toker.erase(toker.end()-1);
@@ -186,7 +213,7 @@ void rShell::parse(string cmdLine){
             }
             
             stringstream ss;
-            ss << toker;    //check
+            ss << toker;
             
             string determString;
             ss >> determString;
@@ -194,31 +221,28 @@ void rShell::parse(string cmdLine){
             string tempHolder;
             
             if (determString == "[" || determString == "test") {
-                //cout << "CREATING TESTCOMMAND" << endl;
                 string finalString;
                 ss >> finalString;
-                //cout << "first finString check" << finalString << endl;
                 if (finalString.size() == 2) {
                     ss >> tempHolder;
                     finalString += " " + tempHolder;
-                    //cout << "second finString check: " << finalString << endl;
                 }
                 else{
                     string tempFinString = "-e " + finalString;
                     finalString = tempFinString;
                 }
-                //cout << "finalString Check: " << finalString << endl;
                 Command* testcmd = new TestCommand(finalString);
                 cmdlist.push(testcmd);
             }
     
             else{
-                //cout << "CREATING NORMAL COMMAND" << endl;
                 if(toker != ""){
                     normCommand* comnd = new normCommand(toker);
                     cmdlist.push(comnd);
                 }
             }
+            //cout << "TOKENIZER: " << (*tok) << endl;
+            //cout << "FOLLOWER: " << (*tok) << endl;
         }
     }
 }
@@ -259,9 +283,7 @@ void rShell::createExecuteList(){
 
 void rShell::Run() {
     while (!executeList.empty()) {
-        //cout << "running..." << endl;
-        executeList.front()->execute();
-        //cout << "still running..." << endl;
+        executeList.front()->execute(0,0);
         executeList.pop();
     }
 }
