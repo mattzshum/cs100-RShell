@@ -13,7 +13,7 @@ Following the **composite** design pattern, our composite class will be the *Con
 
 ## Diagram
 
-![example expression tree](/images/Assignment 1 UML.png?raw=true "Diagram")
+![example expression tree](/images/Assignment 1 UML.png)
       
 ## Classes
 * Root directory: Contains files (README.md, src/, tests/, CMakeLists.txt)
