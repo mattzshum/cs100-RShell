@@ -31,8 +31,9 @@ void rShell::display(){
 
 Base* rShell::recParse(string internalCommand) { //TODO
     typedef tokenizer<char_separator<char> > tokenizer;
-    char_separator<char> split("", "&;|#()", drop_empty_tokens);
+    char_separator<char> split("", "&;|#()<>", drop_empty_tokens);
     tokenizer tokens(internalCommand, split);
+    tokenizer::iterator fol = tokens.begin();
     for(tokenizer::iterator tok = tokens.begin(); tok != tokens.end(); ++tok){
         if(*(tok) == "#"){
             break;
@@ -40,22 +41,33 @@ Base* rShell::recParse(string internalCommand) { //TODO
         else if(*(tok) == "("){
             string internalCmd;
             tok++;
+            fol++;
             while(*(tok) != ")"){
                 internalCmd += *(tok);
                 tok++;
+                fol++;
             }
             cmdlist.push(recParse(internalCmd));
         }
         else if(*(tok) == "|"){
-            tok++; 
-            //| always comes in pairs so must ++ to skip iteration
-            
-            Base* oor = new Or();
-            connectorListRecursive.push(oor);
+            fol++;
+            fol++; // Play around with. Creates OOR despite incrementing here
+            if((*fol) == "|"){
+                //cout << "has created OOR" << endl;
+                tok++;
+                Base* oor = new Or();
+                connectorListRecursive.push(oor);
+            }
+            else{
+                //cout << "has created PIPE" << endl;
+                Base* pipe = new Pipe();
+                connectorListRecursive.push(pipe);
+                //tok++;
+            }
         }
         else if(*(tok) == "&"){
             tok++;
-            
+            fol++;
             Base* aand = new And();
             connectorListRecursive.push(aand);
         }
@@ -64,6 +76,23 @@ Base* rShell::recParse(string internalCommand) { //TODO
             
             Base* semicolon = new SemiColon();
             connectorListRecursive.push(semicolon);
+        }
+        else if((*tok) == "<"){
+            Base* inputredirect = new InputRedirect();
+            connectorListRecursive.push(inputredirect);
+        }
+        else if((*tok) == ">"){
+            fol++;
+            fol++;
+            if((*fol) == ">"){
+                Base* doubleoutput = new DoubleOutput();
+                connectorListRecursive.push(doubleoutput);
+                tok++;
+            }
+            else{
+                Base* outputredirect = new OutputRedirect();
+                connectorListRecursive.push(outputredirect);
+            }
         }
         else{
             //cout << "has arrived at an unexpected point" << endl;
