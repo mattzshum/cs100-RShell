@@ -10,6 +10,9 @@
 #include "../src/testcommand.h"
 
 #include "../src/rshell.h"
+#include "../src/doubleoutput.h"
+#include "../src/outputredirect.h"
+#include "../src/inputredirect.h"
 
 #include "gtest/gtest.h"
 
@@ -150,6 +153,35 @@ TEST(ParenthesisComplex, ParenthesisComplex){
     EXPECT_EQ(overallConnector->execute(0, 0), overallConnector->execute(0, 0));
 }
 
+TEST(carrotRight, carrotDoubleRight){
+    string commandLine = "ls -a >> existingInputFile.txt";
+    Base* connector = new DoubleOutput();
+    Base* lhs = new normCommand("ls -a");
+    Base* rhs = new normCommand("existingInputFile.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotLeft, carrotLeftSingle){
+    string commandLine = "existingInputFile.txt < ls -a";
+    Base* connector = new InputRedirect();
+    Base* lhs = new normCommand("existingInputFile.txt");
+    Base* rhs = new normCommand("ls -a");
+
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
+
+TEST(carrotRightSingle, carrotRightSingle){
+    string commandLine = "ls -a > existingInputFile.txt";
+    Base* connector = new OutputRedirect();
+    Base* lhs = new normCommand("ls -a");
+    Base* rhs = new normCommand("existingInputFile.txt");
+    
+    connector->setBase(lhs, rhs);
+    EXPECT_EQ(connector->execute(0,0), connector->execute(0,0));
+}
 
 int main(int argc, char **argv){
     ::testing::InitGoogleTest(&argc, argv);
