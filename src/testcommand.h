@@ -22,9 +22,10 @@ class TestCommand : public Command{
   public:
     TestCommand();
     TestCommand(string);
+    string getCommand();
     void setBase(Base*, Base*);
     bool isConnector();
-    bool execute();
+    bool execute(int, int);
 };
 
 #endif
