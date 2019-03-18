@@ -17,7 +17,9 @@ bool TestCommand::isConnector(){
     return false;
 }
 
-bool TestCommand::execute(){
+string TestCommand::getCommand() { return cmd;}
+
+bool TestCommand::execute(int in, int out){
     
     char ** path;
     int argc = 0;
@@ -37,7 +39,7 @@ bool TestCommand::execute(){
         temp = "";
         iss >> temp;
         restCmd = temp;
-        cout << "string check: " << temp << endl;
+        //cout << "string check: " << temp << endl;
         
         if (temp != "") {
             string restCmd = cmd.substr(cmd.find_first_of(" "), cmd.length());
@@ -65,7 +67,7 @@ bool TestCommand::execute(){
         return false;
     }
     
-    cout << "TESTER" << endl;
+    //cout << "TESTER" << endl;
     
     if (stat(path[1], &buf) == -1) {
         perror("stat");
