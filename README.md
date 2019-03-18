@@ -7,7 +7,7 @@ Product Information
 ## Introduction
 We will be developing a command shell (Rshell) in C++ that will be able to print command prompts, read in commands and connectors from standard input, and execute the appropriate commands using _execvp_, _waitpid_, and _fork_. A shell is a user interface which accesses an operating system’s services. Specific characters (commands) will be used to provide instructions and send data to the operating system. 
 
-Rshell will be able to handle inputs without limit to the number of commands chained together through connections as well as any combination of operators. Since this program is structural/object focused, we will use composite pattern to represent the hierarchies of our classes. Our program will make sure to take precedence i.e. parentheses into account when reading in different commands along with their connectors. Rshell will also be able to handle test commands [] with flags (-e, -f, -d). 
+Rshell will be able to handle inputs without limit to the number of commands chained together through connections as well as any combination of operators. Since this program is structural/object focused, we will use composite pattern to represent the hierarchies of our classes. Our program will make sure to take precedence i.e. parentheses into account when reading in different commands along with their connectors. Rshell will also be able to handle test commands [ ] with flags (-e, -f, -d). Through the utilization of dup, dup2, and pipe, Rshell will allow for the redirection of inputs, outputs, and double outputs.
 
 Following the **composite** design pattern, our composite class will be the *Connector* class along with a *leaf* class called Operator.
 
@@ -26,6 +26,10 @@ Following the **composite** design pattern, our composite class will be the *Con
   * And class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command was a success.
   * Or class: Inherited class where objects represent a connector within a line of input and holds one command. Command will only execute if the previous command fails.
   * Semicolon class: Inherited class where objects represent a connector within a line of input and holds one command. Command will always execute regardless of the success or failure of the previous command. The first command in a list of commands is always from the Semicolon class.
+  * InputRedirect class : Inherited class of Connector which handles input to be redirected from a file.
+  * OutputRedirect class : Inherited class of Connector which handles output to be redirected to a file rather than standard output.
+  * DoubleOutput class : Inherited class of Connector which handles output to be redirected to a file rather than standard output while appending that output to a file.
+  * Pipe class : Inherited class of Connector which allows the redirection of one command/process into another command/process.
   * Rshell class: Leaf class to handle the parsing of commands and build the structural design of commands read in for execution. 
 * unit_tests/
   * unit_test.cpp: Google testing framework
